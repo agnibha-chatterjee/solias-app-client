@@ -23,13 +23,6 @@ function Dashboard() {
                             <span className='nav-text'>Customers</span>{' '}
                         </NavLink>
                     </Menu.Item>
-                    <Menu.Item key='2'>
-                        <UserOutlined />
-                        <NavLink to='/subscriptions'>
-                            {' '}
-                            <span className='nav-text'>Subscriptions</span>{' '}
-                        </NavLink>
-                    </Menu.Item>
                 </Menu>
             </Sider>
             <Layout>

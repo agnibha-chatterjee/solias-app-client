@@ -133,11 +133,24 @@ class ShowOrders extends React.Component {
     render() {
         const columns = [
             {
-                title: 'ID',
+                title: ' ID',
                 dataIndex: '_id',
-                width: '30%',
+                width: '20%',
                 ...this.getColumnSearchProps('_id'),
             },
+            {
+                title: 'Shopify Order ID',
+                dataIndex: 'shopifyId',
+                width: '20%',
+                ...this.getColumnSearchProps('_id'),
+            },
+            {
+                title: 'Shopify Order Number',
+                dataIndex: 'ordNum',
+                width: '20%',
+                ...this.getColumnSearchProps('ordnum'),
+            },
+
             {
                 title: 'Placed',
                 dataIndex: 'isPlaced',
@@ -146,6 +159,7 @@ class ShowOrders extends React.Component {
             {
                 title: 'Delivery Date',
                 dataIndex: 'dd',
+                width: '20%',
                 ...this.getColumnSearchProps('dd'),
             },
         ];
@@ -169,6 +183,12 @@ class ShowOrders extends React.Component {
                                 const order = this.props.orders.filter(
                                     (o) => o._id === _id
                                 );
+                                if (
+                                    order[0] === undefined ||
+                                    order[0] === null
+                                ) {
+                                    return alert('This order doesnt exist!');
+                                }
                                 this.setState(() => ({
                                     selectedEvent: record,
                                     date: moment(

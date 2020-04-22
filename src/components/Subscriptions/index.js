@@ -38,13 +38,16 @@ const Subscriptions = () => {
         const da = data.orders.map((d, index) => {
             return {
                 key: index,
-                dd: moment(data.startDate.toString(), 'YYYY-MM-DD').format(
+                dd: moment(d.deliveryDate.toString(), 'YYYY-MM-DD').format(
                     'Do MMMM YYYY'
                 ),
                 isPlaced: d.isPlaced.toString(),
                 _id: d._id,
+                ordNum: d.shopifyOrderNumber,
+                shopifyId: d.shopifyOrderId,
             };
         });
+        console.log(data.orders);
         setShowOrders(() => true);
         setSelectedSubscription(() => data);
         setOrderData(() => da);
@@ -75,16 +78,15 @@ const Subscriptions = () => {
                 'Do MMMM YYYY'
             );
             return (
-                <Col key={data._id} span={8}>
+                <Col key={data._id} span={5}>
                     <Card
                         title={data.productTitle}
                         bordered={false}
-                        style={{ width: 450 }}>
+                        style={{ width: 300 }}>
                         <p>Subscription ID : #{data._id}</p>
                         <p>Shopify Order Number : {data.shopifyOrderNumber}</p>
                         <p>Shopify Order ID : {data.shopifyOrderId}</p>
                         <p>Start Date : {date}</p>
-                        <p>Addons : {data.addOns}</p>
                         <p>
                             Receipt URL :{' '}
                             <a
@@ -122,7 +124,7 @@ const Subscriptions = () => {
         <Empty />
     ) : (
         <>
-            <Row gutter={16}>{showSubs()}</Row>
+            <Row gutter={6}>{showSubs()}</Row>
             {showOrders ? (
                 <ShowOrders
                     data={orderData}
